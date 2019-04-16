@@ -20,9 +20,10 @@ struct Universities * initUn(char * nameUn, struct Faculties * facUn);
 struct Universities * addUn(
   struct Universities * universities,
   char * nameUn, struct Faculties * facUn);
-struct Universities * delUn(struct Universities * universities, char * nameUn);
+struct Universities * delLastUn(struct Universities * universities);
 void ShowUn(struct Universities * un);
 
+struct Faculties * delLastFc(struct Faculties * facUn);
 struct Faculties * initFc(char * nameFc);
 void showFc(struct Faculties * fac);
 
@@ -33,7 +34,11 @@ int main() {
   facUn = initFc("CIT");
   listUn = initUn("KhPI", facUn);
 
+  listUn = addUn(listUn, "KhNURE", facUn);
+
   ShowUn(listUn);
+  while(listUn)
+    listUn = delLastUn(listUn);
 
   return 0;
 }
@@ -98,15 +103,24 @@ void ShowUn(struct Universities * un)
   printf("\n");
 }
 
-/*struct Universities * delUn(struct Universities * universities, char * nameUn)
+struct Faculties * delLastFc(struct Faculties * facUn)
+{
+  struct Faculties * temp;
+  temp = facUn;
+  while(facUn->next)
+    facUn = facUn->next;
+  free(facUn);
+  return temp;
+}
+
+struct Universities * delLastUn(struct Universities * universities)
 {
   struct Universities * temp;
   temp = universities;
-  int found = -1;
-  while((found = strcmp(temp->name, nameUn)) != 0 && temp->next != NULL)
-  {
-    temp = temp->next;
-  }
-  if(found == 0)
-
-}*/
+  while(universities->next)
+    universities = universities->next;
+  while(universities->fac->name)
+    universities->fac = delLastFc(universities->fac);
+  free(universities);
+  return temp;
+}
