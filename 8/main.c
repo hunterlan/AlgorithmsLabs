@@ -109,7 +109,8 @@ struct Faculties * delLastFc(struct Faculties * facUn)
   temp = facUn;
   while(facUn->next)
     facUn = facUn->next;
-  free(facUn);
+  if(facUn)
+    free(facUn);
   return temp;
 }
 
