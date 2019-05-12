@@ -1,6 +1,0 @@
-/home/hunterlan/Git/RGZ/Variant2/Variant2/bin/Debug/Variant2.exe
-/home/hunterlan/Git/RGZ/Variant2/Variant2/bin/Debug/Variant2.pdb
-/home/hunterlan/Git/RGZ/Variant2/Variant2/obj/Debug/Variant2.csprojAssemblyReference.cache
-/home/hunterlan/Git/RGZ/Variant2/Variant2/obj/Debug/Variant2.csproj.CoreCompileInputs.cache
-/home/hunterlan/Git/RGZ/Variant2/Variant2/obj/Debug/Variant2.exe
-/home/hunterlan/Git/RGZ/Variant2/Variant2/obj/Debug/Variant2.pdb
