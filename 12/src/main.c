@@ -60,15 +60,23 @@ void HoaraSort(int a[], int b, int e) {
     while (a[j] > x)
       j--;
     if (i <= j) {
+      swaping++;
+      comparing++;
       swap(a[i], a[j]);
       i++;
       j--;
     }
   } while (i <= j);
   if (i < e)
-    HoaraSort(a, i, e);
+    {
+      comparing++;
+      HoaraSort(a, i, e);
+    }
   if (b < j)
-    HoaraSort(a, b, j);
+    {
+      comparing++;
+      HoaraSort(a, b, j);
+    }
 }
 
 void PairMergeSort(int a[]) {
@@ -88,6 +96,7 @@ void PairMergeSort(int a[]) {
       else
         sj = si;
       if (sj > 0) {
+        comparing++;
         k = i0; // нач. индекс слитого множества
         while ((i < i0 + si + sj) &&
                (j < j0 + sj)) // цикл пока не исчерпаются оба входные множества
@@ -97,6 +106,7 @@ void PairMergeSort(int a[]) {
           // вых.множество расширяется иначе - освобождается место в
           // вых.множестве и туда  заносится эл-т из 2-го множества
           {
+            comparing++;
             t = a[j];
             for (m = j - 1; m >= k; m--)
               a[m + 1] = a[m];
@@ -135,10 +145,107 @@ int main() {
   clock_t start, finish;
   float result;
 
+  printf("Sorting partly sorted tree\n\n");
   Fill(a, 0);
+  start = clock();
   TreeSort(a);
+  finish = clock();
+  result = (float)(finish - start) / CLOCKS_PER_SEC;
   printf("Count swaping with sorted array: %i\n", swaping);
   printf("Count comparing: %i\n", comparing);
+  printf("Time is: %f\n\n", result);
+
+  swaping = 0;
+  comparing = 0;
+  Fill(a, 1);
+  start = clock();
+  TreeSort(a);
+  finish = clock();
+  result = (float)(finish - start) / CLOCKS_PER_SEC;
+  printf("Count swaping with reversed sorted array: %i\n", swaping);
+  printf("Count comparing: %i\n", comparing);
+  printf("Time is: %f\n\n", result);
+
+  swaping = 0;
+  comparing = 0;
+  Fill(a, 2);
+  start = clock();
+  TreeSort(a);
+  finish = clock();
+  result = (float)(finish - start) / CLOCKS_PER_SEC;
+  printf("Count swaping with random data: %i\n", swaping);
+  printf("Count comparing: %i\n", comparing);
+  printf("Time is: %f\n\n", result);
+
+  printf("Sorting Hoara\n\n");
+  swaping = 0;
+  comparing = 0;
+
+  Fill(a, 0);
+  start = clock();
+  HoaraSort(a, 0, N-1);
+  finish = clock();
+  result = (float)(finish - start) / CLOCKS_PER_SEC;
+  printf("Count swaping with sorted array: %i\n", swaping);
+  printf("Count comparing: %i\n", comparing);
+  printf("Time is: %f\n\n", result);
+
+  swaping = 0;
+  comparing = 0;
+  Fill(a, 1);
+  start = clock();
+  HoaraSort(a, 0, N-1);
+  finish = clock();
+  result = (float)(finish - start) / CLOCKS_PER_SEC;
+  printf("Count swaping with reversed sorted array: %i\n", swaping);
+  printf("Count comparing: %i\n", comparing);
+  printf("Time is: %f\n\n", result);
+
+  swaping = 0;
+  comparing = 0;
+  Fill(a, 2);
+  start = clock();
+  HoaraSort(a, 0, N-1);
+  finish = clock();
+  result = (float)(finish - start) / CLOCKS_PER_SEC;
+  printf("Count swaping with random data: %i\n", swaping);
+  printf("Count comparing: %i\n", comparing);
+  printf("Time is: %f\n\n", result);
+
+  printf("Pair merge sorting\n\n");
+  swaping = 0;
+  comparing = 0;
+
+  Fill(a, 0);
+  start = clock();
+  PairMergeSort(a);
+  finish = clock();
+  result = (float)(finish - start) / CLOCKS_PER_SEC;
+  printf("Count swaping with sorted array: %i\n", swaping);
+  printf("Count comparing: %i\n", comparing);
+  printf("Time is: %f\n\n", result);
+
+  swaping = 0;
+  comparing = 0;
+  Fill(a, 1);
+  start = clock();
+  PairMergeSort(a);
+  finish = clock();
+  result = (float)(finish - start) / CLOCKS_PER_SEC;
+  printf("Count swaping with reversed sorted array: %i\n", swaping);
+  printf("Count comparing: %i\n", comparing);
+  printf("Time is: %f\n\n", result);
+
+  swaping = 0;
+  comparing = 0;
+  Fill(a, 2);
+  start = clock();
+  PairMergeSort(a);
+  finish = clock();
+  result = (float)(finish - start) / CLOCKS_PER_SEC;
+  printf("Count swaping with random data: %i\n", swaping);
+  printf("Count comparing: %i\n", comparing);
+  printf("Time is: %f\n\n", result);
 
   return 0;
 }
