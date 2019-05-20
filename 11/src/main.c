@@ -9,7 +9,7 @@
     y = t;                                                                     \
   }
 
-#define N 50000
+#define N 20
 
 int swaping = 0;
 int comparing = 0;
@@ -68,7 +68,8 @@ void Fill(int a[], int isReversOrRand) {
 // void Fill(int a[], char *path) {}
 
 int main() {
-  int a[N];
+  //int a[N]; - static
+  int * a = (int *)malloc(N * sizeof(int));
 
   clock_t start, finish;
   float result;
@@ -120,6 +121,8 @@ int main() {
   /*for (int i = 0; i < N; i++)
     printf("%i\t", a[i]);
   printf("\n");*/
+
+  free(a); //if dynamic
 
   return 0;
 }

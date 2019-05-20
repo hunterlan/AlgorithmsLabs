@@ -52,6 +52,8 @@ int main() {
         exit(1);
     }
     PrintOch();
+    char s;
+    cin >> s;
   } while (1);
 
   return 0;

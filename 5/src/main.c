@@ -48,7 +48,7 @@ int main() {
   start = clock();
   PrintArray(array);
   finish = clock();
-  // printf("Result is: %f\n", float(finish - start) / CLOCKS_PER_SEC);
+  printf("Result is: %.5f\n", (float)(finish - start) / CLOCKS_PER_SEC);
   for (int i = 0; i < N; i++)
     for (int j = 0; j < N; j++)
       Put(vec, i, j, array[i][j]); //сжатие массива
@@ -58,7 +58,7 @@ int main() {
     printf("%3i", vec[i]);
   printf("\n\n");
   finish = clock();
-  // printf("Result is: %f\n", float(finish - start) / CLOCKS_PER_SEC);
+  printf("Result is: %.5f\n", (float)(finish - start) / CLOCKS_PER_SEC);
   start = clock();
   for (int i = 0; i < N; i++) {
     for (int j = 0; j < N; j++) //чтение из сжатого представления
@@ -66,6 +66,6 @@ int main() {
     printf("\n");
   }
   finish = clock();
-  // printf("Result is: %f\n", float(finish - start) / CLOCKS_PER_SEC);
+  printf("Result is: %.5f\n", (float)(finish - start) / CLOCKS_PER_SEC);
   return 0;
 }

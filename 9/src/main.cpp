@@ -3,8 +3,10 @@
 
 using namespace std;
 
-const int SIZE_BAR = 105000 + 1;
-const int SIZE = 105000;
+const int SIZE = 10000;
+const int SIZE_BAR = SIZE + 1;
+
+static int comparing = 0;
 
 void fillArr(int arr[], size_t size);
 int LinearSearchWithBarrier(int arr[], int key);
@@ -25,19 +27,27 @@ int main() {
     cout << "The number on index: " << index << '\n';
     cout << "Time: " << float(finish - start) / CLOCKS_PER_SEC << '\n';
   }
+
+  cout << "Count comparing: " << comparing << "\n";
+
+  comparing = 0;
   int arr2[SIZE];
   fillArr(arr2, SIZE);
   int m = SIZE / 2;
   start = clock();
-  if (BinSearch(arr2, 285, m) == false) {
+  if (BinSearch(arr2, 2, m) == false) {
     finish = clock();
     cout << "The number was found\n ";
+    cout.precision(2);
     cout << "Time: " << float(finish - start) / CLOCKS_PER_SEC << '\n';
   } else {
     finish = clock();
     cout << "The number isn't found.\n";
-    cout << "Time: " << float(finish - start) / CLOCKS_PER_SEC << '\n';
+    cout.precision(2);
+    cout << "Time: " << float(finish - start) / CLOCKS_PER_SEC  << '\n';
   }
+
+  cout << "Count comparing: " << comparing << "\n";
 
   return 0;
 }
@@ -45,7 +55,7 @@ int main() {
 void fillArr(int arr[], size_t size) {
   srand(time(NULL));
   for (int i = 0; i < size; i++)
-    arr[i] = rand() % 500;
+    arr[i] = rand() % 1000;
 }
 
 int LinearSearchWithBarrier(int arr[], int key) {
@@ -55,6 +65,7 @@ int LinearSearchWithBarrier(int arr[], int key) {
     i++;
     if (i == SIZE_BAR - 1)
       return -1;
+    comparing++;
   }
   return i;
 }
@@ -66,9 +77,15 @@ bool BinSearch(int *arr, int key, int &m) {
   {
     m = (b + e) / 2; //середина интервала
     if (arr[m] < key)
-      b = m + 1; //поиск в правой части массива
+      {
+        comparing++;
+        b = m + 1;
+      } //поиск в правой части массива
     else if (arr[m] > key)
-      e = m - 1; //иначе - в левой части
+    {
+      comparing++;
+      e = m - 1;
+    } //иначе - в левой части
     else
       notFound = false; // поиск состоялся
   }
